@@ -4,3 +4,6 @@
 [submodule "ecohub-backend"]
 	path = ecohub-backend
 	url = git@github.com:mythigen/ecohub-backend.git
+[submodule "ecohub-ai"]
+	path = ecohub-ai
+	url = git@github.com:mythigen/ecohub-ai.git
