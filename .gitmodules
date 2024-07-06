@@ -1,0 +1,3 @@
+[submodule "ecohub-frontend"]
+	path = ecohub-frontend
+	url = ./ecohub-frontend
