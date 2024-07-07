@@ -1,0 +1,62 @@
+# Part I - Users
+users
+  id int pk
+  email VARCHAR(255) UNIQUE
+  first_name VARCHAR(255)
+  last_name VARCHAR(255)
+  role INT
+  created_at DATETIME
+  suspended_at DATETIME
+
+users_profiles
+  id int pk
+  user_id INT fk users.id
+  phone_number VARCHAR(255)
+  country VARCHAR(255)
+  region VARCHAR(255)
+  address VARCHAR(255)
+  gender BOOL
+
+users_media
+  id int pk
+  user_id INT fk users.id
+  file_name VARCHAR(255)
+  file_type VARCHAR(255)
+  flag VARCHAR(255) | NONE, PROFILE, COVER, PROFILE_CURRENT, COVER_CURRENT
+  created_at DATETIME
+  removed_at DATETIME
+
+users_keys
+  id INT pk
+  user_id INT fk users.id
+  username VARCHAR(255) UNIQUE
+  password VARCHAR(255)
+  temporary TINYINT(1)
+  is_primary TINYINT(1)
+
+users_sessions
+  id INT pk
+  user_id INT # fk users_keys.id
+  session_token VARCHAR(255)
+  expires_idle DATETIME
+  expires_active DATETIME
+  created_at DATETIME
+  terminated_at DATETIME
+
+users_invitations
+  id INT pk
+  user_id INT fk users.id
+  uuid VARCHAR(255)
+  active TINYINT(1)
+  created_at DATETIME
+  expires_at DATETIME
+  type user_type("FORGOTTEN",  "NEW")="FORGOTTEN"
+
+users_failed_attempts
+  id INT pk
+  email VARCHAR(255)
+  password VARCHAR(255)
+  created_at DATETIME
+
+fk users_sessions.user_id -> users.id
+
