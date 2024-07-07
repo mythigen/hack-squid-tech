@@ -7,3 +7,6 @@
 [submodule "ecohub-ai"]
 	path = ecohub-ai
 	url = git@github.com:mythigen/ecohub-ai.git
+[submodule "ecohub-mobile"]
+	path = ecohub-mobile
+	url = git@github.com:abdelhafidHadjadj/ecohub-mobile
