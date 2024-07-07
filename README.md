@@ -19,6 +19,7 @@ Ecological Impact Tracking
 
 Calculation of the environmental impact of collective actions (e.g., number of trees planted, kg of waste recycled). Statistics and graphs to visualize the impact.
 # Links
+Key resources related to the Ecohub project
 - [UI](https://www.figma.com/design/RovZ86lPZa9hwmEPzxXzDO/Hackathon?node-id=1-6)
 - [Objective](https://www.figma.com/design/RovZ86lPZa9hwmEPzxXzDO/Hackathon?node-id=0-1)
 - [Frontend](https://github.com/mythigen/ecohub-frontend)

@@ -60,3 +60,17 @@ users_failed_attempts
 
 fk users_sessions.user_id -> users.id
 
+# Part II - User Relations
+
+connections
+  id SERIAL pk
+  created_by INT fk users.id
+  sent_to INT fk users.id
+  connection_hash INT UNIQUE
+# connection_state | Requested, Approved, Rejected, Blocked
+
+connections_states
+  id SERIAL pk
+  connection_id INT fk connections.id
+  connection_state | Requested, Approved, Rejected, Blocked
+  created_at TIMESTAMP
