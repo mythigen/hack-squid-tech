@@ -1,3 +1,13 @@
+# Ecohub
+
+# Links
+- [UI](https://www.figma.com/design/RovZ86lPZa9hwmEPzxXzDO/Hackathon?node-id=1-6)
+- [Objective](https://www.figma.com/design/RovZ86lPZa9hwmEPzxXzDO/Hackathon?node-id=0-1)
+- [Frontend](https://github.com/mythigen/ecohub-frontend)
+- [Backend](https://github.com/mythigen/ecohub-backend)
+- [Mobile](https://github.com/abdelhafidHadjadj/ecohub-mobile)
+- [AI](https://github.com/mythigen/ecohub-ai)
+
 # Tech Stack
 | Backend          | Database   | Frontend       | Emails      | Mobile                                              |
 | ---------------- | ---------- | -------------- | ----------- | --------------------------------------------------- |
