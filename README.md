@@ -36,6 +36,12 @@ Calculation of the environmental impact of collective actions (e.g., number of t
 |                  |            | OAuth          |             | Protocols: <br>- HTTPs <br>- WSs <br>- SSE (Server-sent events) |
 
 # AI Integration
+### Self Check-in
+`Coming soon`
+### Tree planting validation
+`Coming soon`
+### OCR for Scale
+`Coming soon`
 ### Correlation
 - Location
 - Population
