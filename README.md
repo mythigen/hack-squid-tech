@@ -28,6 +28,10 @@ Key resources related to the Ecohub project
 - [AI](https://github.com/mythigen/ecohub-ai)
 - [Splash Screen Figma](https://www.figma.com/community/file/1155362909441341285/expo-app-icon-splash)
 
+# Documentation
+### Databases
+- [PostgreSQL - main](./databases/README.md)
+
 # Tech Stack
 | Backend          | Database   | Frontend       | Emails      | Mobile                                              |
 | ---------------- | ---------- | -------------- | ----------- | --------------------------------------------------- |
