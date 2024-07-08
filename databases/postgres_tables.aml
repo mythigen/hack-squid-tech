@@ -66,7 +66,6 @@ connections
   id SERIAL pk
   created_by INT fk users.id
   sent_to INT fk users.id
-  connection_hash INT UNIQUE
 # connection_state | Requested, Approved, Rejected, Blocked
 
 connections_states
@@ -74,3 +73,132 @@ connections_states
   connection_id INT fk connections.id
   connection_state | Requested, Approved, Rejected, Blocked
   created_at TIMESTAMP
+
+# Part III- Posts
+posts
+  id SERIAL pk
+  created_by INT fk users.id
+  content VARCHAR(1024) | 2 Bytes
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_interractions
+  id SERIAL pk
+  post_id INT fk posts.id
+  created_by INT fk users.id
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_comments
+  id SERIAL pk
+  post_id INT fk posts.id
+  created_by INT fk users.id
+  content VARCHAR(512)
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_comments_interractions
+  id SERIAL pk
+  comment_id INT fk posts_comments.id
+  created_by INT fk users.id
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_reports
+  id SERIAL pk
+  post_id INT fk posts.id
+  created_by INT fk users.id
+  report_type VARCHAR(256)
+  content VARCHAR(512)
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_comments_reports
+  id SERIAL pk
+  comment_id INT fk posts_comments.id
+  created_by INT fk users.id
+  report_type VARCHAR(256)
+  content VARCHAR(512)
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+posts_media
+  id int pk
+  post_id INT fk posts.id
+  file_name VARCHAR(255)
+  file_type VARCHAR(255)
+  created_at DATETIME
+  removed_at DATETIME
+
+posts_tags
+  id int pk
+  post_id INT fk posts.id
+  tag_name VARCHAR(255)
+
+posts_resposts
+  id SERIAL pk
+  post_id INT fk posts.id
+  resposted_by INT fk users.id
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+
+# TODO: shares
+
+# Part IV - Events
+event
+  id SERIAL pk
+  created_by INT fk users.id
+  title VARCHAR(255)
+  description VARCHAR(1024) | 2 Bytes
+  event_type VARCHAR(255) | recycle, cleanup, planting
+  address VARCHAR(255)
+  checkin_validation_method VARHCAR(255) | self
+  task_validation_method VARCHAR(255) | qr, ai, manual etc
+  created_at TIMESTAMP
+  deleted_at TIMESTAMP
+# due_date DATETIME | adjust timezones
+
+event_interested
+  id SERIAL pk
+  event_id INT fk event.id
+  user_id INT fk users.id
+  created_at TIMESTAMP
+
+event_organizers_invitations
+  id SERIAL pk
+  event_id INT fk event.id
+  sent_to INT fk users.id
+
+event_organizers_invitations_states
+  id SERIAL pk
+  invitation_id INT fk event_organizers_invitations.id
+  connection_state | Requested, Approved, Rejected, Blocked
+  created_at TIMESTAMP
+
+event_planning
+  id SERIAL pk
+  event_id INT fk event.id
+  activity_name VARCHAR(255)
+  activity_description VARCHAR(255)
+  activity_begins_at DATETIME
+  activity_ends_at DATETIME
+
+event_media
+  id INT pk
+  event_id INT fk event.id
+  file_name VARCHAR(255)
+  file_type VARCHAR(255)
+  created_at DATETIME
+  removed_at DATETIME
+
+event_goals
+  id INT pk
+  event_id INT fk event.id
+  goal_type VARCHAR(255)
+  goal_value VARCHAR(255)
+  created_at DATETIME
+  removed_at DATETIME
+
+# task tracker qr
+# acheivements badges and contributions
+# event share
