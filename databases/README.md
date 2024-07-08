@@ -13,3 +13,8 @@
 | 1  | 0  | 1  | Profile Picture (Current)| PROFILE_CURRENT |
 | 1  | 1  | 0  | Cover Picture (Current)  | COVER_CURRENT   |
 | 1  | 1  | 1  | Deleted                  | REMOVED         |
+
+
+# MongoDB
+- Messages
+- Notifications
