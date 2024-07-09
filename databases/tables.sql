@@ -285,5 +285,41 @@ CREATE IF NOT EXISTS event_goals (
 );
 
 -- task tracker qr
+CREATE IF NOT EXISTS qr_codes (
+  id SERIAL PRIMARY KEY,
+  file_name VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  terminated_at TIMESTAMP,
+  expires_at DATETIME
+);
+
+CREATE IF NOT EXISTS qr_codes_event (
+  id SERIAL PRIMARY KEY,
+  event_id INT,
+  qr_purpose VARCHAR(255),
+  qr_code_id,
+  FOREIGN KEY(event_id) REFERENCES event(id),
+  FOREIGN KEY(qr_code_id) REFERENCES qr_codes(id)
+);
+
+CREATE IF NOT EXISTS qr_codes_participants (
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  event_id INT,
+  qr_code_id INT,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(event_id) REFERENCES event(id),
+  FOREIGN KEY(qr_code_id) REFERENCES qr_codes(id)
+);
+
+CREATE IF NOT EXISTS qr_codes_scans (
+  id SERIAL PRIMARY KEY,
+  scaned_by INT,
+  qr_code_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(scaned_by) REFERENCES users(id),
+  FOREIGN KEY(qr_code_id) REFERENCES qr_codes(id)
+);
+
 -- acheivements badges and contributions
 -- event share

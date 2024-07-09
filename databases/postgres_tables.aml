@@ -200,5 +200,30 @@ event_goals
   removed_at DATETIME
 
 # task tracker qr
+qr_codes
+  id SERIAL pk
+  file_name VARCHAR(255)
+  created_at DATETIME
+  terminated_at TIMESTAMP
+  expires_at DATETIME
+
+qr_codes_event
+  id SERIAL pk
+  event_id INT fk event.id
+  qr_purpose VARCHAR(255) | checkin, validation
+  qr_code_id INT fk qr_codes.id
+
+qr_codes_participants
+  id SERIAL pk
+  user_id fk users.id
+  event_id INT fk event.id
+  qr_code_id INT fk qr_codes.id
+
+qr_codes_scans
+  id SERIAL pk
+  scaned_by fk users.id
+  qr_code_id INT fk qr_codes.id
+  scanned_at TIMESTAMP
+
 # acheivements badges and contributions
 # event share

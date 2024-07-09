@@ -2,7 +2,7 @@
 [postgres_tables.aml](./postgres_tables.aml)
 ## AML screenshot
 Screenshot of postgres database diagram. `(temporary)` <br>
-![AML screenshot](./2024-07-09_02-15.png)
+![AML screenshot](./2024-07-09_03-37.png)
 
 ## Part I - Users
 - Media flags:
