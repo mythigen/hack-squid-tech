@@ -13,9 +13,69 @@ VALUES(
   CONCAT('EMAIL ', $2),
   $3, 
   true
+);INTO users_sessions
+
+-- User Event: Create Session
+INSERT INTO users_sessions (
+  user_id,
+  session_id,
+)
+VALUES (
+  (SELECT id FROM users WHERE email = $1),
+  $2
 );
 
--- User Event: Setup Profile - Full
+-- User Event: Extend Session Lifetime
+UPDATE users_sessions
+SET expires_idle_at = NOW() + INTERVAL '3 DAY'
+WHERE session_id = $1;
+
+-- User Event: Check Session Validity
+SELECT session_id
+FROM users_sessions
+WHERE session_id = $1
+AND expires_idle_at > NOW()
+AND expires_active_at > NOW()
+AND (suspended_at = NULL OR suspended_at > NOW());
+
+-- User Event: Create Invitation on Sign-up
+INSERT INTO users_invitations (
+  user_id,
+  uuid
+)
+VALUES ( 
+  (SELECT id FROM users WHERE email = $1),
+  $2
+);
+
+-- User Event: Create Invitation
+INSERT INTO users_invitations (
+  user_id,
+  invitation_type,
+  uuid
+)
+VALUES ( 
+  (SELECT id FROM users WHERE email = $1),
+  $2, $3
+);
+
+-- User Event: Use Invitation
+UPDATE users_invitations
+SET used_at = NOW()
+WHERE uuid = $1
+AND expires_at > NOW()
+AND (suspended_at = NULL OR suspended_at > NOW());
+
+-- User Event: Log Failed attempts
+INSERT INTO users_failed_attempts (
+  email,
+  ip,
+)
+VALUES (
+  $1, $2
+);
+
+-- User Event: Setup Profile  - Full
 INSERT INTO users_profiles (
   user_id,
   phone_number,

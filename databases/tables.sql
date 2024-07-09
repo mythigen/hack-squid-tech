@@ -47,21 +47,14 @@ CREATE TABLE IF NOT EXISTS users_authentication_credentials (
 );
 
 -- USERS ACTIVE SESSIONS TABLE
-CREATE TABLE IF NOT EXISTS users_active_sessions (
+CREATE TABLE IF NOT EXISTS users_sessions (
   id SERIAL PRIMARY KEY,
   user_id INT,
   session_id VARCHAR(255),
-  expires_active_at TIMESTAMP,
+  expires_active_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '90 DAY',
+  expires_idle_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '3 DAY',
   suspended_at TIMESTAMP,
   FOREIGN KEY(user_id) REFERENCES users(id)
-);
-
--- USERS IDLE SESSIONS TABLE
-CREATE TABLE IF NOT EXISTS users_idle_sessions (
-  id SERIAL PRIMARY KEY,
-  active_session_id INT,
-  expires_idle_at TIMESTAMP,
-  FOREIGN KEY(active_session_id) REFERENCES users_active_sessions(id)
 );
 
 -- USERS INVITATIONS TABLE
@@ -69,25 +62,19 @@ CREATE TABLE IF NOT EXISTS users_invitations (
   id SERIAL PRIMARY KEY,
   user_id INT,
   invitation_type VARCHAR(10) DEFAULT 'NEW',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  suspended_at TIMESTAMP,
-  FOREIGN KEY(user_id) REFERENCES users(id)
-);
-
--- USERS INVITATION UUID TABLE
-CREATE TABLE IF NOT EXISTS users_invitation_uuid (
-  id SERIAL PRIMARY KEY,
-  invitation_id INT,
   uuid VARCHAR(255) UNIQUE NOT NULL,
-  active BOOLEAN DEFAULT FALSE,
-  FOREIGN KEY(invitation_id) REFERENCES users_invitations(id)
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  expires_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP + INTERVAL '7 DAY',
+  suspended_at TIMESTAMP,
+  used_at TIMESTAMP,
+  FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 -- USERS FAILED ATTEMPTS TABLE
 CREATE TABLE IF NOT EXISTS users_failed_attempts (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  ip VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
