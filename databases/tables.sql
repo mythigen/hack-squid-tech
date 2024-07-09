@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_name VARCHAR(255) NOT NULL,
   role INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  suspended_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  suspended_at TIMESTAMP
 );
 
 -- USERS PROFILES
@@ -27,18 +27,9 @@ CREATE TABLE IF NOT EXISTS users_media (
   uesr_id INT,
   file_name VARCHAR(255),
   file_type VARCHAR(255),
-  flag VARCHAR(255),
+  flag VARCHAR(255) DEFAULT 'NONE',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   removed_at TIMESTAMP,
-  FOREIGN KEY(user_id) REFERENCES users(id)
-);
-
--- USERS AUTHENTICATION KEYS TABLE
-CREATE TABLE IF NOT EXISTS users_authentication_keys (
-  id SERIAL PRIMARY KEY,
-  user_id INT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  suspended_at TIMESTAMP,
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
